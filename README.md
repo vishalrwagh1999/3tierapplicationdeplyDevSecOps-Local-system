@@ -2,8 +2,8 @@
 
 
 =========on my local laptop.==============================================
-  358  cd 3tierapplicationdeplyDevSecOps/
-  359  ls -ltrh
+358  cd 3tierapplicationdeplyDevSecOps/
+359  ls -ltrh
   360  chmod 755 *.sh
   361  ls -ltrh
   362  ./2nd-Docker.sh
