@@ -1,48 +1,62 @@
-# 3tierapplicationdeplyDevSecOps
+# 3-Tier Application Deployment with DevSecOps
 
 
-=========on my local laptop.==============================================
-358  cd 3tierapplicationdeplyDevSecOps/
-359  ls -ltrh
-360  chmod 755 *.sh
-361  ls -ltrh
-362  ./2nd-Docker.sh
-363  ./3rd-Adduser+python.sh
-364  ls -ltrh
-365  cat /etc/group
-366  vi 3rd-Adduser+python.sh
-367  ./3rd-Adduser+python.sh
-368  ls -ltrh
-369  ./4th-Trivy.sh
-370  trivy version
-371  docker login -u vishaldocker85
-372  docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
-373  systemctl status docker.socket
-374  systemctl start docker.socket
-375  systemctl status docker.socket
-376  docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
-377  docker ps
-378  docker images
-388  hostname -i
-391  curl https://ifconfig.me/
-392  ip addr show eth0 | grep inet         ---------------- to see private ip of localhost
-394  netstat -tuln | grep 8080
-395  ls -ltrh
-396  cat 7th-Pipeline-WithoutTrivy
-397  systemctl status docker.socket
-398  sudo usermod -aG docker jenkins
-399  bash /etc/init.d/jenkins.ubuntu stop
-400  ps -ef | grep jenkins
-401  bash /etc/init.d/jenkins.ubuntu start
-402  ps -ef | grep jenkins
-403  ls -ld /var/run/docker.sock
-405  docker ps
-406  docker images
-407  docker exec -it mysql_db mysql -u root -prootpass
-408  docker exec -it mysql_db mysql -u root -p
-=======trivy commands - for image scanning================
-410  trivy version
-411  docker images
-412  trivy image nginx
-413  trivy image 5107333e08a8
-414  history
+
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [DevSecOps Architecture](#devsecops-architecture)
+3. [Pre-Requisites](#pre-requisites)
+4. [Environment Setup](#environment-setup)
+5. [Security & Analysis Tools](#security--analysis-tools)
+6. [CI/CD Pipeline Integration](#cicd-pipeline-integration)
+7. [Database Layer](#database-layer)
+8. [Troubleshooting & Debugging](#troubleshooting--debugging)
+
+---
+
+# Project Overview
+
+## Introduction
+This project demonstrates a robust **DevSecOps** implementation for a 3-tier monolithic architecture. By integrating security at every stage of the lifecycle—from initial environment setup to container image scanning—we ensure that the application is not only functional but also secure and production-ready.
+
+### Key Features
+- **Automated Infrastructure**: Shell scripts for rapid environment provisioning.
+- **Vulnerability Management**: Automated container scanning using **Trivy**.
+- **Static Analysis**: Real-time code quality checks via **SonarQube**.
+- **Container Orchestration**: Standardized Docker environment for application tiers.
+
+---
+
+# DevSecOps Architecture
+
+
+
+The workflow follows a "Shift-Left" security approach:
+1. **Code**: Developers commit code to the repository.
+2. **Scan**: Source code is analyzed by SonarQube for bugs and vulnerabilities.
+3. **Build**: Docker images are created for the Web, App, and DB tiers.
+4. **Secure**: Trivy scans the Docker images for OS-level CVEs before deployment.
+
+---
+
+# Pre-Requisites
+
+### 1. System Requirements
+- Linux-based environment (Ubuntu recommended).
+- Minimum 4GB RAM to run SonarQube and Jenkins concurrently.
+
+### 2. Tools & Access
+- **Docker**: Container runtime.
+- **Trivy**: Security scanner.
+- **Jenkins**: CI/CD automation server.
+- **Docker Hub Account**: For image registry management.
+
+---
+
+# Environment Setup
+
+### 1. Script Permissions
+Ensure all automation scripts have the necessary execution rights:
+```bash
+chmod 755 *.sh
+ls -ltrh
